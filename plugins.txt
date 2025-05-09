@@ -1,0 +1,5 @@
+workflow-aggregator
+workflow-multibranch
+git
+branch-api
+scm-api
