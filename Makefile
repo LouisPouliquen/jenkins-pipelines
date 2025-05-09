@@ -18,7 +18,7 @@ cli:
 	curl -s -o jenkins-cli.jar http://localhost:8080/jnlpJars/jenkins-cli.jar
 
 seed: cli
-	bash ./setup_pipeline_b.sh
+	bash ./setup_pipeline_c.sh
 
 reset:
 	rm -rf jenkins_home jenkins-cli.jar

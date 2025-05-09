@@ -1,4 +1,4 @@
-# Task B – Jenkins Pipeline for Doxygen Generation
+# Task C – Jenkins Pipeline for Doxygen Generation
 
 This repository sets up a local Jenkins environment using Docker Compose to run a pipeline that generates Doxygen documentation for a forked C++/C project.
 
@@ -13,42 +13,30 @@ Automate the following via a Jenkins pipeline:
   - Enable HTML output
   - Disable LaTeX output
 - Run Doxygen
-- Archive the HTML output as `doc.tar.gz`
+- Run the parser on the generated `doxygen.log`
+- Output a structured `warnings.csv` file
+- Archive both `doc.tar.gz` and `warnings.csv`
 
 
-## 🐳 Jenkins Environment (Local, Docker-based)
+## 🐳 Jenkins Environment
 
-The setup uses a custom Jenkins image with:
+This pipeline uses the same Docker-based Jenkins setup as Task B. See Task B for instructions on:
 
-- Preinstalled Doxygen
-- Jenkins plugins installed via `plugins.txt`
-- Job seed automation using `jenkins-cli.jar`
+- How to build and run Jenkins (`make up`)
+- How to seed a new pipeline job (`make seed`)
 
 
-## 🚀 Usage
+## 🧪 Pipeline Stages
 
-### 1. Build and Start Jenkins
-
-```bash
-make up
-```
-
-This will:
-
-* Build the Jenkins image
-* Start Jenkins via Docker Compose
-* Expose Jenkins on `http://localhost:8080`
-
-After Jenkins is ready:
-
-```bash
-make seed
-```
-
-This will:
-* Download `jenkins-cli.jar`
-* Create (or update) a job named `taskb-pipeline` from `multibranch-config.xml`
-
+| Stage                     | Description                                                      |
+|---------------------------|------------------------------------------------------------------|
+| Clone RepoA               | Clone the forked C/C++ repo (e.g. `grpc`)                        |
+| Configure Doxygen         | Add `WARN_LOGFILE = doxygen.log` to `Doxyfile`                  |
+| Run Doxygen               | Generate `html/` output and `doxygen.log`                       |
+| Clone RepoC               | Clone your parser project                                        |
+| Install Parser Deps       | Run `pip install -r requirements.txt` if present                |
+| Run Parser                | Execute the Python script to convert `doxygen.log` → `warnings.csv` |
+| Archive Artifacts         | Archive `doc.tar.gz` and `warnings.csv`                         |
 
 
 ## ✅ Makefile Targets
@@ -60,5 +48,5 @@ This will:
 | `make down`   | Stop and remove Jenkins container       |
 | `make logs`   | Tail Jenkins logs                       |
 | `make cli`    | Download `jenkins-cli.jar`              |
-| `make seed`   | Seed the job using `setup_pipeline_b.sh` |
+| `make seed`   | Seed the job using `setup_pipeline_c.sh` |
 | `make reset`  | Delete volumes, reset everything        |

@@ -3,7 +3,7 @@
 set -e
 
 JENKINS_URL="http://localhost:8080"
-JOB_NAME="${1:-taskb-pipeline}"
+JOB_NAME="${1:-taskc-pipeline}"
 CONFIG_FILE="multibranch-config.xml"
 
 # 1. Download Jenkins CLI
