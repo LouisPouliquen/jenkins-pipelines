@@ -30,7 +30,7 @@ make seed
 
 Once Jenkins is running, you can open `http://localhost:8080` to monitor the pipeline jobs (`taskb-pipeline`, `taskc-pipeline`).
 
-Each branch (`taskb`, `taskc`) includes a Jenkinsfile that defines the pipeline logic. The success of each stage and the generated artifacts (doc.tar.gz, warnings.csv) were validated manually through the Jenkins UI.
+Each branch ([taskb](https://github.com/LouisPouliquen/jenkins-pipelines/tree/taskb), [taskc](https://github.com/LouisPouliquen/jenkins-pipelines/tree/taskc)) includes a Jenkinsfile that defines the pipeline logic. The success of each stage and the generated artifacts (doc.tar.gz, warnings.csv) were validated manually through the Jenkins UI.
 
 ### Optional Improvement
 
